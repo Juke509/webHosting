@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  webizly:
+    image: kaw393939/webizly:production
+    container_name: ebj3-production
+    pull_policy: always
+    restart: always
+    networks:
+       - traefik
+       - backend
+    ports:
+      - "80"
+    environment:
+      - DEPLOYMENT=production
+      - DATABASE_URL=postgresql+psycopg2://production:production@postgres:5432/production
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "production"
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.ebj3.rule=Host(`www.ebj3njit.info`) || Host(`ebj3njit.info`)
+      - traefik.http.routers.ebj3.entrypoints=https
+      - traefik.http.routers.ebj3.tls=true
+      - traefik.http.routers.ebj3.tls.certresolver=simple-resolver
+      - traefik.http.services.ebj3.loadbalancer.server.port=8080
+networks:
+  traefik:
+      name: traefik
+      external: true
+  backend:
+      name: backend
+      external: true

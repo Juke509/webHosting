@@ -1,0 +1,170 @@
+{"level":"info","msg":"Traefik version 2.5.2 built on 2021-09-02T15:07:43Z","time":"2023-02-03T16:02:50Z"}
+{"level":"debug","msg":"Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"http\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"https\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"udp\":{\"timeout\":\"3s\"}},\"https\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"udp\":{\"timeout\":\"3s\"}},\"traefik\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"network\":\"traefik\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"insecure\":true,\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/logs/traefik.log\",\"format\":\"json\"},\"accessLog\":{\"format\":\"common\",\"filters\":{},\"fields\":{\"defaultMode\":\"keep\",\"headers\":{\"defaultMode\":\"drop\"}}},\"certificatesResolvers\":{\"simple-resolver\":{\"acme\":{\"email\":\"ebj3@njit.edu\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"/letsencrypt/acme.json\",\"keyType\":\"RSA4096\",\"httpChallenge\":{\"entryPoint\":\"http\"}}}},\"pilot\":{\"dashboard\":true}}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n","time":"2023-02-03T16:02:50Z"}
+{"entryPointName":"http","level":"debug","msg":"Start TCP Server","time":"2023-02-03T16:02:50Z"}
+{"entryPointName":"traefik","level":"debug","msg":"Start TCP Server","time":"2023-02-03T16:02:50Z"}
+{"entryPointName":"https","level":"debug","msg":"Start TCP Server","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Starting provider aggregator.ProviderAggregator {}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Starting provider *traefik.Provider {}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Starting provider *docker.Provider {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"network\":\"traefik\",\"swarmModeRefreshSeconds\":\"15s\"}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Starting provider *acme.ChallengeTLSALPN {\"Timeout\":4000000000}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Starting provider *acme.Provider {\"email\":\"ebj3@njit.edu\",\"caServer\":\"https://acme-v02.api.letsencrypt.org/directory\",\"storage\":\"/letsencrypt/acme.json\",\"keyType\":\"RSA4096\",\"httpChallenge\":{\"entryPoint\":\"http\"},\"ResolverName\":\"simple-resolver\",\"store\":{},\"TLSChallengeProvider\":{\"Timeout\":4000000000},\"HTTPChallengeProvider\":{}}","time":"2023-02-03T16:02:50Z"}
+{"level":"info","msg":"Testing certificate renew...","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:50Z"}
+{"level":"debug","msg":"Configuration received from provider internal: {\"http\":{\"routers\":{\"acme-http\":{\"entryPoints\":[\"http\"],\"service\":\"acme-http@internal\",\"rule\":\"PathPrefix(`/.well-known/acme-challenge/`)\",\"priority\":2147483647},\"api\":{\"entryPoints\":[\"traefik\"],\"service\":\"api@internal\",\"rule\":\"PathPrefix(`/api`)\",\"priority\":2147483646},\"dashboard\":{\"entryPoints\":[\"traefik\"],\"middlewares\":[\"dashboard_redirect@internal\",\"dashboard_stripprefix@internal\"],\"service\":\"dashboard@internal\",\"rule\":\"PathPrefix(`/`)\",\"priority\":2147483645},\"http-to-https\":{\"entryPoints\":[\"http\"],\"middlewares\":[\"redirect-http-to-https\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"acme-http\":{},\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"dashboard_redirect\":{\"redirectRegex\":{\"regex\":\"^(http:\\\\/\\\\/(\\\\[[\\\\w:.]+\\\\]|[\\\\w\\\\._-]+)(:\\\\d+)?)\\\\/$\",\"replacement\":\"${1}/dashboard/\",\"permanent\":true}},\"dashboard_stripprefix\":{\"stripPrefix\":{\"prefixes\":[\"/dashboard/\",\"/dashboard\"]}},\"redirect-http-to-https\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"tls\":{}}","providerName":"internal","time":"2023-02-03T16:02:50Z"}
+{"level":"debug","msg":"Configuration received from provider simple-resolver.acme: {\"http\":{},\"tls\":{}}","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:50Z"}
+{"level":"debug","msg":"No default certificate, generating one","time":"2023-02-03T16:02:50Z","tlsStoreName":"default"}
+{"level":"debug","msg":"Provider connection established with docker 20.10.23 (API 1.41)","providerName":"docker","time":"2023-02-03T16:02:50Z"}
+{"level":"debug","msg":"Configuration received from provider docker: {\"http\":{\"routers\":{\"traefik_https\":{\"entryPoints\":[\"https\"],\"service\":\"api@internal\",\"rule\":\"Host(`traefik.ebj3njit.info`)\",\"tls\":{\"certResolver\":\"simple-resolver\"}}},\"services\":{\"traefik-traefik\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.21.0.2:80\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}","providerName":"docker","time":"2023-02-03T16:02:50Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware acme-http@internal","routerName":"acme-http@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware noop@internal","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Creating middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Setting up redirection to https 443","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","msg":"Adding tracing to middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"api@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware dashboard@internal","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","middlewareType":"StripPrefix","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"No default certificate, generating one","time":"2023-02-03T16:02:51Z","tlsStoreName":"default"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"api@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware dashboard@internal","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","middlewareType":"StripPrefix","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware noop@internal","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Creating middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Setting up redirection to https 443","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","msg":"Adding tracing to middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware acme-http@internal","routerName":"acme-http@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"No default certificate, generating one","time":"2023-02-03T16:02:51Z","tlsStoreName":"default"}
+{"level":"debug","msg":"Serving default certificate for request: \"traefik.ebj3njit.info\"","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"http: TLS handshake error from 128.235.159.0:55895: remote error: tls: unknown certificate","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"api@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware dashboard@internal","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","middlewareType":"StripPrefix","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware noop@internal","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Creating middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Setting up redirection to https 443","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","msg":"Adding tracing to middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware acme-http@internal","routerName":"acme-http@internal","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"https","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"traefik_https@docker","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"https","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:02:51Z"}
+{"entryPointName":"https","level":"debug","msg":"Adding route for traefik.ebj3njit.info with TLS options default","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"Try to challenge certificate for domain [traefik.ebj3njit.info] found in HostSNI rule","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"Looking for provided certificate(s) to validate [\"traefik.ebj3njit.info\"]...","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"Domains [\"traefik.ebj3njit.info\"] need ACME certificates generation for domains \"traefik.ebj3njit.info\".","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"Loading ACME certificates [traefik.ebj3njit.info]...","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:02:51Z"}
+{"level":"debug","msg":"Building ACME client...","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"https://acme-v02.api.letsencrypt.org/directory","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:58Z"}
+{"level":"info","msg":"Register...","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] acme: Registering account for ebj3@njit.edu","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"Using HTTP Challenge provider.","providerName":"simple-resolver.acme","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] acme: Obtaining bundled SAN certificate","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] AuthURL: https://acme-v02.api.letsencrypt.org/acme/authz-v3/200540884746","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] acme: Could not find solver for: tls-alpn-01","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] acme: use http-01 solver","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] acme: Trying to solve HTTP-01","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"Unable to split host and port: address traefik.ebj3njit.info: missing port in address. Fallback to request host.","providerName":"acme","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"Retrieving the ACME challenge for token 8vbi8e6m0tNoZGTwT7be5pZXokPqtwgTLuKPx-I7GZU...","providerName":"acme","time":"2023-02-03T16:02:58Z"}
+{"level":"debug","msg":"Unable to split host and port: address traefik.ebj3njit.info: missing port in address. Fallback to request host.","providerName":"acme","time":"2023-02-03T16:02:59Z"}
+{"level":"debug","msg":"Retrieving the ACME challenge for token 8vbi8e6m0tNoZGTwT7be5pZXokPqtwgTLuKPx-I7GZU...","providerName":"acme","time":"2023-02-03T16:02:59Z"}
+{"level":"debug","msg":"Unable to split host and port: address traefik.ebj3njit.info: missing port in address. Fallback to request host.","providerName":"acme","time":"2023-02-03T16:02:59Z"}
+{"level":"debug","msg":"Retrieving the ACME challenge for token 8vbi8e6m0tNoZGTwT7be5pZXokPqtwgTLuKPx-I7GZU...","providerName":"acme","time":"2023-02-03T16:02:59Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"traefik.ebj3njit.info\"","time":"2023-02-03T16:03:00Z"}
+{"level":"debug","msg":"http: TLS handshake error from 128.235.159.0:13698: remote error: tls: unknown certificate","time":"2023-02-03T16:03:00Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] The server validated our request","time":"2023-02-03T16:03:02Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] acme: Validations succeeded; requesting certificates","time":"2023-02-03T16:03:02Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"traefik.ebj3njit.info\"","time":"2023-02-03T16:03:07Z"}
+{"level":"debug","msg":"http: TLS handshake error from 128.235.159.0:55903: remote error: tls: unknown certificate","time":"2023-02-03T16:03:07Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"traefik.ebj3njit.info\"","time":"2023-02-03T16:03:07Z"}
+{"level":"debug","msg":"legolog: [INFO] [traefik.ebj3njit.info] Server responded with a certificate.","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"Certificates obtained for domains [traefik.ebj3njit.info]","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"Configuration received from provider simple-resolver.acme: {\"http\":{},\"tls\":{}}","providerName":"simple-resolver.acme","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"No default certificate, generating one","time":"2023-02-03T16:03:10Z","tlsStoreName":"default"}
+{"level":"debug","msg":"Adding certificate for domain(s) traefik.ebj3njit.info","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"api@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware dashboard@internal","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","middlewareType":"StripPrefix","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_stripprefix@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Creating middleware","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","middlewareType":"RedirectRegex","msg":"Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"dashboard_redirect@internal","msg":"Adding tracing to middleware","routerName":"dashboard@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"traefik","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware noop@internal","routerName":"http-to-https@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Creating middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","middlewareType":"RedirectScheme","msg":"Setting up redirection to https 443","routerName":"http-to-https@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"redirect-http-to-https@internal","msg":"Adding tracing to middleware","routerName":"http-to-https@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware acme-http@internal","routerName":"acme-http@internal","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"http","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"https","level":"debug","middlewareName":"tracing","middlewareType":"TracingForwarder","msg":"Added outgoing tracing middleware api@internal","routerName":"traefik_https@docker","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"https","level":"debug","middlewareName":"traefik-internal-recovery","middlewareType":"Recovery","msg":"Creating middleware","time":"2023-02-03T16:03:10Z"}
+{"entryPointName":"https","level":"debug","msg":"Adding route for traefik.ebj3njit.info with TLS options default","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"Try to challenge certificate for domain [traefik.ebj3njit.info] found in HostSNI rule","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"Looking for provided certificate(s) to validate [\"traefik.ebj3njit.info\"]...","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"No ACME certificate generation required for domains [\"traefik.ebj3njit.info\"].","providerName":"simple-resolver.acme","routerName":"traefik_https@docker","rule":"Host(`traefik.ebj3njit.info`)","time":"2023-02-03T16:03:10Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:59522: read tcp 172.21.0.2:443-\u003e161.35.153.48:59522: read: connection reset by peer","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:59636: read tcp 172.21.0.2:443-\u003e161.35.153.48:59636: read: connection reset by peer","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:59766: read tcp 172.21.0.2:443-\u003e161.35.153.48:59766: read: connection reset by peer","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:59860: tls: client requested unsupported application protocols ([http/0.9 http/1.0 spdy/1 spdy/2 spdy/3 h2c hq])","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:33Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60024: tls: client requested unsupported application protocols ([hq h2c spdy/3 spdy/2 spdy/1 http/1.0 http/0.9])","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:54524: read tcp 172.21.0.2:80-\u003e159.223.76.135:54524: read: connection reset by peer","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60144: read tcp 172.21.0.2:443-\u003e161.35.153.48:60144: read: connection reset by peer","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60324: read tcp 172.21.0.2:443-\u003e161.35.153.48:60324: read: connection reset by peer","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:54662: read tcp 172.21.0.2:80-\u003e159.223.76.135:54662: read: connection reset by peer","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60466: read tcp 172.21.0.2:443-\u003e161.35.153.48:60466: read: connection reset by peer","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:34Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60588: read tcp 172.21.0.2:443-\u003e161.35.153.48:60588: read: connection reset by peer","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:54776: read tcp 172.21.0.2:80-\u003e159.223.76.135:54776: read: connection reset by peer","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"http: TLS handshake error from 161.35.153.48:60794: read tcp 172.21.0.2:443-\u003e161.35.153.48:60794: read: connection reset by peer","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:54872: tls: client requested unsupported application protocols ([http/0.9 http/1.0 spdy/1 spdy/2 spdy/3 h2c hq])","time":"2023-02-03T16:04:35Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55028: tls: client requested unsupported application protocols ([hq h2c spdy/3 spdy/2 spdy/1 http/1.0 http/0.9])","time":"2023-02-03T16:04:36Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:36Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55110: read tcp 172.21.0.2:80-\u003e159.223.76.135:55110: read: connection reset by peer","time":"2023-02-03T16:04:36Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:37Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55154: read tcp 172.21.0.2:80-\u003e159.223.76.135:55154: read: connection reset by peer","time":"2023-02-03T16:04:37Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:37Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55250: read tcp 172.21.0.2:80-\u003e159.223.76.135:55250: read: connection reset by peer","time":"2023-02-03T16:04:37Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:38Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55324: read tcp 172.21.0.2:80-\u003e159.223.76.135:55324: read: connection reset by peer","time":"2023-02-03T16:04:38Z"}
+{"level":"debug","msg":"Serving default certificate for request: \"129.158.236.253\"","time":"2023-02-03T16:04:38Z"}
+{"level":"debug","msg":"http: TLS handshake error from 159.223.76.135:55398: read tcp 172.21.0.2:80-\u003e159.223.76.135:55398: read: connection reset by peer","time":"2023-02-03T16:04:39Z"}
+{"level":"info","msg":"I have to go...","time":"2023-02-03T16:06:47Z"}
+{"level":"info","msg":"Stopping server gracefully","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"https","level":"debug","msg":"Waiting 10s seconds before killing connections.","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"http","level":"debug","msg":"Waiting 10s seconds before killing connections.","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"traefik","level":"debug","msg":"Waiting 10s seconds before killing connections.","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"http","level":"error","msg":"accept tcp [::]:80: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"https","level":"error","msg":"accept tcp [::]:443: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"traefik","level":"error","msg":"accept tcp [::]:8080: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"traefik","level":"error","msg":"close tcp [::]:8080: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"traefik","level":"debug","msg":"Entry point traefik closed","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"http","level":"error","msg":"close tcp [::]:80: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"https","level":"error","msg":"close tcp [::]:443: use of closed network connection","time":"2023-02-03T16:06:47Z"}
+{"entryPointName":"https","level":"debug","msg":"Entry point https closed","time":"2023-02-03T16:06:48Z"}
+{"entryPointName":"http","level":"debug","msg":"Entry point http closed","time":"2023-02-03T16:06:49Z"}
+{"level":"info","msg":"Server stopped","time":"2023-02-03T16:06:49Z"}
+{"level":"info","msg":"Shutting down","time":"2023-02-03T16:06:49Z"}
